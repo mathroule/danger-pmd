@@ -42,7 +42,7 @@ module Danger
     GRADLEW_NOT_FOUND = "Could not find `gradlew` inside current directory"
     REPORT_FILE_NOT_FOUND = "PMD report not found"
 
-    # Calls pmd task of your gradle project.
+    # Calls PMD task of your Gradle project.
     # It fails if `gradlew` cannot be found inside current directory.
     # It fails if `report_file` cannot be found inside current directory.
     # @return [void]
@@ -81,7 +81,7 @@ module Danger
       @target_files ||= (git.modified_files - git.deleted_files) + git.added_files
     end
 
-    # Run gradle task
+    # Run Gradle task
     # @return [void]
     def exec_gradle_task
       system "./gradlew #{gradle_task}"
@@ -99,26 +99,25 @@ module Danger
       File.exist?(report_file)
     end
 
-    # A getter for `gradle_task`, returning "pmd" if value is nil.
+    # A getter for `pmd_report`, returning PMD report.
     # @return [Oga::XML::Document]
     def pmd_report
       require "oga"
       @pmd_report ||= Oga.parse_xml(File.open(report_file))
     end
 
-    # A getter for PMD files.
+    # A getter for PMD issues, returning PMD issues.
     # @return [Array[PmdFile]]
-    def pmd_files
-      @pmd_files ||= pmd_report.xpath("//file").map do |pmd_file|
+    def pmd_issues
+      @pmd_issues ||= pmd_report.xpath("//file").map do |pmd_file|
         PmdFile.new(gradle_module, pmd_file)
       end
     end
 
     # Send inline comment with Danger's warn or fail method
-    #
     # @return [void]
     def send_inline_comment
-      pmd_files.each do |pmd_file|
+      pmd_issues.each do |pmd_file|
         next unless target_files.include? pmd_file.absolute_path
 
         pmd_file.violations.each do |pmd_violation|

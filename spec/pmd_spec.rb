@@ -47,51 +47,51 @@ module Danger
       it "Create files" do
         custom_report_path = "spec/fixtures/pmd_report.xml"
         @my_plugin.report_file = custom_report_path
-        pmd_files = @my_plugin.pmd_files
-        expect(pmd_files).not_to be_nil
+        pmd_issues = @my_plugin.pmd_issues
+        expect(pmd_issues).not_to be_nil
 
-        pmd_file1 = pmd_files[0]
-        expect(pmd_file1).not_to be_nil
-        expect(pmd_file1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
-        expect(pmd_file1.absolute_path).to eq("app/src/main/java/com/android/sample/Tools.java")
-        expect(pmd_file1.violations).not_to be_nil
-        expect(pmd_file1.violations.length).to eq(1)
-        expect(pmd_file1.violations.first).not_to be_nil
-        expect(pmd_file1.violations.first.line).to eq(5)
-        expect(pmd_file1.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
+        pmd_issue1 = pmd_issues[0]
+        expect(pmd_issue1).not_to be_nil
+        expect(pmd_issue1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.absolute_path).to eq("app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.violations).not_to be_nil
+        expect(pmd_issue1.violations.length).to eq(1)
+        expect(pmd_issue1.violations.first).not_to be_nil
+        expect(pmd_issue1.violations.first.line).to eq(5)
+        expect(pmd_issue1.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
 
-        pmd_file2 = pmd_files[1]
-        expect(pmd_file2).not_to be_nil
-        expect(pmd_file2.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
-        expect(pmd_file2.absolute_path).to eq("app/src/main/java/com/android/sample/MainActivity.java")
-        expect(pmd_file2.violations).not_to be_nil
-        expect(pmd_file2.violations.length).to eq(1)
-        expect(pmd_file2.violations.first).not_to be_nil
-        expect(pmd_file2.violations.first.line).to eq(39)
-        expect(pmd_file2.violations.first.description).to eq("Use equals() to compare strings instead of '==' or '!='")
+        pmd_issue2 = pmd_issues[1]
+        expect(pmd_issue2).not_to be_nil
+        expect(pmd_issue2.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
+        expect(pmd_issue2.absolute_path).to eq("app/src/main/java/com/android/sample/MainActivity.java")
+        expect(pmd_issue2.violations).not_to be_nil
+        expect(pmd_issue2.violations.length).to eq(1)
+        expect(pmd_issue2.violations.first).not_to be_nil
+        expect(pmd_issue2.violations.first.line).to eq(39)
+        expect(pmd_issue2.violations.first.description).to eq("Use equals() to compare strings instead of '==' or '!='")
 
-        pmd_file3 = pmd_files[2]
-        expect(pmd_file3).not_to be_nil
-        expect(pmd_file3.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
-        expect(pmd_file3.absolute_path).to eq("app/src/test/java/com/android/sample/ExampleUnitTest.java")
-        expect(pmd_file3.violations).not_to be_nil
-        expect(pmd_file3.violations.length).to eq(1)
-        expect(pmd_file3.violations.first).not_to be_nil
-        expect(pmd_file3.violations.first.line).to eq(15)
-        expect(pmd_file3.violations.first.description).to eq("The JUnit 4 test method name 'addition_isCorrect' doesn't match '[a-z][a-zA-Z0-9]*'")
+        pmd_issue3 = pmd_issues[2]
+        expect(pmd_issue3).not_to be_nil
+        expect(pmd_issue3.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
+        expect(pmd_issue3.absolute_path).to eq("app/src/test/java/com/android/sample/ExampleUnitTest.java")
+        expect(pmd_issue3.violations).not_to be_nil
+        expect(pmd_issue3.violations.length).to eq(1)
+        expect(pmd_issue3.violations.first).not_to be_nil
+        expect(pmd_issue3.violations.first.line).to eq(15)
+        expect(pmd_issue3.violations.first.description).to eq("The JUnit 4 test method name 'addition_isCorrect' doesn't match '[a-z][a-zA-Z0-9]*'")
 
-        pmd_file4 = pmd_files[3]
-        expect(pmd_file4).not_to be_nil
-        expect(pmd_file4.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
-        expect(pmd_file4.absolute_path).to eq("app/src/test/java/com/android/sample/ToolsTest.java")
-        expect(pmd_file4.violations).not_to be_nil
-        expect(pmd_file4.violations.length).to eq(2)
-        expect(pmd_file4.violations[0]).not_to be_nil
-        expect(pmd_file4.violations[0].line).to eq(12)
-        expect(pmd_file4.violations[0].description).to eq("The JUnit 4 test method name 'getLabel_1' doesn't match '[a-z][a-zA-Z0-9]*'")
-        expect(pmd_file4.violations[1]).not_to be_nil
-        expect(pmd_file4.violations[1].line).to eq(18)
-        expect(pmd_file4.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
+        pmd_issue4 = pmd_issues[3]
+        expect(pmd_issue4).not_to be_nil
+        expect(pmd_issue4.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue4.absolute_path).to eq("app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue4.violations).not_to be_nil
+        expect(pmd_issue4.violations.length).to eq(2)
+        expect(pmd_issue4.violations[0]).not_to be_nil
+        expect(pmd_issue4.violations[0].line).to eq(12)
+        expect(pmd_issue4.violations[0].description).to eq("The JUnit 4 test method name 'getLabel_1' doesn't match '[a-z][a-zA-Z0-9]*'")
+        expect(pmd_issue4.violations[1]).not_to be_nil
+        expect(pmd_issue4.violations[1].line).to eq(18)
+        expect(pmd_issue4.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
       end
 
       it "Send inline comments" do
