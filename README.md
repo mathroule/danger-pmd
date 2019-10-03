@@ -1,6 +1,6 @@
-# danger-pmd
+# Danger PMD
 
-A description of danger-pmd.
+Danger plugin for PMD report XML file. This plugin is inspired from https://github.com/kazy1991/danger-findbugs.
 
 ## Installation
 
