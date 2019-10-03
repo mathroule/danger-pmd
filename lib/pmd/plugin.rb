@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Danger
   # Checks on your Gradle project's Java source files.
   # This is done using [PMD](https://pmd.github.io)
@@ -17,7 +19,7 @@ module Danger
   # @tags java, android, pmd
 
   class DangerPmd < Plugin
-    require_relative './pmd_file'
+    require_relative "./pmd_file"
 
     # Custom Gradle module to run.
     # This is useful when your project has different flavors.
@@ -46,6 +48,7 @@ module Danger
     # @return [void]
     def report(inline_mode = true)
       return fail(GRADLEW_NOT_FOUND) unless gradlew_exists?
+
       exec_gradle_task
       return fail(REPORT_FILE_NOT_FOUND) unless report_file_exist?
 
@@ -57,22 +60,20 @@ module Danger
     # A getter for `gradle_module`, returning "app" if value is nil.
     # @return [String]
     def gradle_module
-      @gradle_module ||= 'app'
+      @gradle_module ||= "app"
     end
 
     # A getter for `gradle_task`, returning "pmd" if value is nil.
     # @return [String]
     def gradle_task
-      @gradle_task  ||= 'pmd'
+      @gradle_task ||= "pmd"
     end
 
     # A getter for `report_file`, returning "app/build/reports/pmd/pmd.xml" if value is nil.
     # @return [String]
     def report_file
-      @report_file ||= 'app/build/reports/pmd/pmd.xml'
+      @report_file ||= "app/build/reports/pmd/pmd.xml"
     end
-
-    #private # FIXME
 
     # A getter for current updated files
     # @return [Array[String]]
@@ -95,13 +96,13 @@ module Danger
     # Check report_file exists in current directory
     # @return [Bool]
     def report_file_exist?
-      File.exists?(report_file)
+      File.exist?(report_file)
     end
 
     # A getter for `gradle_task`, returning "pmd" if value is nil.
     # @return [Oga::XML::Document]
     def pmd_report
-      require 'oga'
+      require "oga"
       @pmd_report ||= Oga.parse_xml(File.open(report_file))
     end
 
@@ -119,11 +120,11 @@ module Danger
     def send_inline_comment
       pmd_files.each do |pmd_file|
         next unless target_files.include? pmd_file.absolute_path
+
         pmd_file.violations.each do |pmd_violation|
           send(pmd_violation.type, pmd_violation.description, file: pmd_file.absolute_path, line: pmd_violation.line)
         end
       end
     end
-
   end
 end

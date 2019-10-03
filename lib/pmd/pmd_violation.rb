@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PmdViolation
   PRIORITY_ERROR_THRESHOLD = 2
   attr_accessor :module_name
@@ -23,5 +25,4 @@ class PmdViolation
   def description
     @description ||= violation.text.gsub("\n", "")
   end
-
 end

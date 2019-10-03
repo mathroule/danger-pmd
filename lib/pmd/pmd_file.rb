@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PmdFile
-  require_relative './pmd_violation'
+  require_relative "./pmd_violation"
   attr_accessor :module_name
   attr_accessor :file
 
@@ -21,5 +23,4 @@ class PmdFile
       PmdViolation.new(module_name, pmd_violation)
     end
   end
-
 end
