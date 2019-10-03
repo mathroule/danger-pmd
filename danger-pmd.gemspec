@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Pmd::VERSION
   spec.authors       = ['Mathieu Rul']
   spec.email         = ['mathroule@gmail.com']
-  spec.description   = %q{A short description of danger-pmd.}
-  spec.summary       = %q{A longer description of danger-pmd.}
-  spec.homepage      = 'https://github.com/Mathieu Rul/danger-pmd'
+  spec.description   = 'A Danger plugin for PMD.'
+  spec.summary       = 'A Danger plugin for PMD (Programming Mistake Detector), see https://pmd.github.io.'
+  spec.homepage      = 'https://github.com/mathroule/danger-pmd'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
