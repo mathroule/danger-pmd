@@ -51,8 +51,6 @@ module Danger
 
       if inline_mode
         send_inline_comment
-      else
-        # TODO not implemented
       end
     end
 
