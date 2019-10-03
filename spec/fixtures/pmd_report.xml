@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.8.0" timestamp="2019-10-03T20:34:18.074">
+<file name="/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java">
+<violation beginline="5" endline="10" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="com.android.sample" class="Tools" externalInfoUrl="https://pmd.github.io/pmd-6.8.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'
+</violation>
+</file>
+<file name="/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java">
+<violation beginline="39" endline="39" begincolumn="25" endcolumn="35" rule="UseEqualsToCompareStrings" ruleset="Error Prone" package="com.android.sample" class="MainActivity" method="onCreate" externalInfoUrl="https://pmd.github.io/pmd-6.8.0/pmd_rules_java_errorprone.html#useequalstocomparestrings" priority="3">
+Use equals() to compare strings instead of '==' or '!='
+</violation>
+</file>
+<file name="/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java">
+<violation beginline="15" endline="17" begincolumn="12" endcolumn="5" rule="MethodNamingConventions" ruleset="Code Style" package="com.android.sample" class="ExampleUnitTest" method="addition_isCorrect" externalInfoUrl="https://pmd.github.io/pmd-6.8.0/pmd_rules_java_codestyle.html#methodnamingconventions" priority="1">
+The JUnit 4 test method name 'addition_isCorrect' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+</file>
+<file name="/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java">
+<violation beginline="12" endline="14" begincolumn="12" endcolumn="5" rule="MethodNamingConventions" ruleset="Code Style" package="com.mathroule.demoapp" class="HelperTest" method="getLabel_1" externalInfoUrl="https://pmd.github.io/pmd-6.8.0/pmd_rules_java_codestyle.html#methodnamingconventions" priority="1">
+The JUnit 4 test method name 'getLabel_1' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="18" endline="20" begincolumn="12" endcolumn="5" rule="MethodNamingConventions" ruleset="Code Style" package="com.mathroule.demoapp" class="HelperTest" method="getLabel_2" externalInfoUrl="https://pmd.github.io/pmd-6.8.0/pmd_rules_java_codestyle.html#methodnamingconventions" priority="1">
+The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+</file>
+</pmd>
