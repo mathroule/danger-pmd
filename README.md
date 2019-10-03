@@ -17,7 +17,7 @@ pmd.report
 </pre>
 </blockquote>
 
-<blockquote>Running PMD with a specific Gradle task or report_file
+<blockquote>Running PMD with a specific Gradle task or report file
 <pre>
 pmd.gradle_task = 'app:pmd' #defalut: pmd
 pmd.report_file = "app/build/reports/pmd/pmd.xml"

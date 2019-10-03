@@ -9,7 +9,7 @@ module Danger
   #
   #          pmd.report
   #
-  # @example Running PMD with a specific Gradle task or report_file
+  # @example Running PMD with a specific Gradle task or report file
   #
   #          pmd.gradle_task = 'app:pmd' #defalut: pmd
   #          pmd.report_file = "app/build/reports/pmd/pmd.xml"
