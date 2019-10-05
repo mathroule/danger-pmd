@@ -15,6 +15,11 @@ module Danger
   #          pmd.report_file = "app/build/reports/pmd/pmd.xml"
   #          pmd.report
   #
+  # @example Running PMD without running a Gradle task
+  #
+  #          pmd.skip_gradle_task = true
+  #          pmd.report
+  #
   # @see mathroule/danger-pmd
   # @tags java, android, pmd
 
@@ -39,6 +44,11 @@ module Danger
     # @return [String]
     attr_writer :report_file
 
+    # Skip Gradle task
+    # If you skip Gradle task, for example project does not manage Gradle.
+    # @return [Bool]
+    attr_writer :skip_gradle_task
+
     GRADLEW_NOT_FOUND = "Could not find `gradlew` inside current directory"
     REPORT_FILE_NOT_FOUND = "PMD report not found"
 
@@ -47,9 +57,12 @@ module Danger
     # It fails if `report_file` cannot be found inside current directory.
     # @return [void]
     def report(inline_mode = true)
-      return fail(GRADLEW_NOT_FOUND) unless gradlew_exists?
+      unless skip_gradle_task
+        return fail(GRADLEW_NOT_FOUND) unless gradlew_exists?
 
-      exec_gradle_task
+        exec_gradle_task
+      end
+
       return fail(REPORT_FILE_NOT_FOUND) unless report_file_exist?
 
       if inline_mode
@@ -67,6 +80,12 @@ module Danger
     # @return [String]
     def gradle_task
       @gradle_task ||= "pmd"
+    end
+
+    # A getter for `skip_gradle_task`, returning false if value is nil.
+    # @return [Boolean]
+    def skip_gradle_task
+      @skip_gradle_task ||= false
     end
 
     # A getter for `report_file`, returning "app/build/reports/pmd/pmd.xml" if value is nil.
