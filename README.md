@@ -39,25 +39,30 @@ Defaults to "pmd".
 If your pmd task outputs to a different location, you can specify it here.
 Defaults to "app/build/reports/pmd/pmd.xml".
 
+`skip_gradle_task` - Skip Gradle task.
+If you skip Gradle task, for example project does not manage Gradle.
+
 #### Methods
 
 `report` - Calls pmd task of your Gradle project.
 It fails if `gradlew` cannot be found inside current directory.
 It fails if `report_file` cannot be found inside current directory.
 
-`target_files` - A getter for current updated files
+`target_files` - A getter for current updated files.
 
-`exec_gradle_task` - Run Gradle task
+`exec_gradle_task` - Run Gradle task.
 
-`gradlew_exists?` - Check gradlew file exists in current directory
+`gradlew_exists?` - Check gradlew file exists in current directory.
 
-`report_file_exist?` - Check report_file exists in current directory
+`report_file_exist?` - Check report_file exists in current directory.
 
 `pmd_report` - A getter for `pmd_report`, returning PMD report.
 
 `pmd_issues` - A getter for PMD issues, returning PMD issues.
 
-`send_inline_comment` - Send inline comment with danger's warn or fail method
+`send_inline_comment` - Send inline comment with danger's warn or fail method.
+
+`skip_gradle_task` - Skip Gradle task.
 
 ## Development
 

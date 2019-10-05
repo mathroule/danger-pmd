@@ -44,6 +44,16 @@ module Danger
         expect(@my_plugin.gradle_task).to eq(custom_task)
       end
 
+      it "Skip Gradle task" do
+        skip_gradle_task = true
+        @my_plugin.skip_gradle_task = skip_gradle_task
+        expect(@my_plugin.skip_gradle_task).to eq(skip_gradle_task)
+      end
+
+      it "Check default skip Gradle task" do
+        expect(@my_plugin.skip_gradle_task).to eq(false)
+      end
+
       it "Create files" do
         custom_report_path = "spec/fixtures/pmd_report.xml"
         @my_plugin.report_file = custom_report_path
