@@ -38,14 +38,15 @@ module Danger
     # @return [String]
     attr_writer :gradle_task
 
-    # Location of report file
+    # Location of report file.
     # If your pmd task outputs to a different location, you can specify it here.
-    # Defaults to "build/reports/pmd/pmd.xml".
+    # Defaults to "app/build/reports/pmd/pmd.xml".
     # @return [String]
     attr_writer :report_file
 
-    # Skip Gradle task
+    # Skip Gradle task.
     # If you skip Gradle task, for example project does not manage Gradle.
+    # Defaults to `false`.
     # @return [Bool]
     attr_writer :skip_gradle_task
 
