@@ -236,6 +236,29 @@ module Danger
         expect(pmd_issue6.violations[1].line).to eq(45)
         expect(pmd_issue6.violations[1].description).to eq("The String literal \"unused\" appears 4 times in this file; the first occurrence is on line 45")
       end
+
+      it "Report without Gradle" do
+        allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return([])
+
+        @pmd.report_file = "spec/fixtures/pmd_report.xml"
+        @pmd.skip_gradle_task = false
+
+        pmd_issues = @pmd.report
+        expect(pmd_issues).not_to be_nil
+        expect(pmd_issues.length).to be(1)
+        expect(pmd_issues[0]).to be("Could not find `gradlew` inside current directory")
+      end
+
+      it "Report with not existing report file" do
+        allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return([])
+
+        @pmd.report_file = "spec/fixtures/custom/pmd_report.xml"
+        @pmd.skip_gradle_task = true
+
+        pmd_issues = @pmd.report
+        expect(pmd_issues).not_to be_nil
+        expect(pmd_issues.length).to be(0)
+      end
     end
   end
 end
