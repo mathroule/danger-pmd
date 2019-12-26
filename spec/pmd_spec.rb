@@ -56,10 +56,10 @@ module Danger
 
       it "Report with report file" do
         target_files = [
-            '/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java',
-            '/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java',
-            '/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java',
-            '/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java'
+          "/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java",
+          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
+          "/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java",
+          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
@@ -114,14 +114,52 @@ module Danger
         expect(pmd_issue4.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
       end
 
+      it "Report with report file not in target files" do
+        target_files = [
+          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
+          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
+        ]
+        allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
+
+        @pmd.report_file = "spec/fixtures/pmd_report.xml"
+        @pmd.skip_gradle_task = true
+
+        pmd_issues = @pmd.report
+        expect(pmd_issues).not_to be_nil
+        expect(pmd_issues.length).to be(2)
+
+        pmd_issue1 = pmd_issues[0]
+        expect(pmd_issue1).not_to be_nil
+        expect(pmd_issue1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.violations).not_to be_nil
+        expect(pmd_issue1.violations.length).to eq(1)
+        expect(pmd_issue1.violations.first).not_to be_nil
+        expect(pmd_issue1.violations.first.line).to eq(5)
+        expect(pmd_issue1.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
+
+        pmd_issue2 = pmd_issues[1]
+        expect(pmd_issue2).not_to be_nil
+        expect(pmd_issue2.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue2.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue2.violations).not_to be_nil
+        expect(pmd_issue2.violations.length).to eq(2)
+        expect(pmd_issue2.violations[0]).not_to be_nil
+        expect(pmd_issue2.violations[0].line).to eq(12)
+        expect(pmd_issue2.violations[0].description).to eq("The JUnit 4 test method name 'getLabel_1' doesn't match '[a-z][a-zA-Z0-9]*'")
+        expect(pmd_issue2.violations[1]).not_to be_nil
+        expect(pmd_issue2.violations[1].line).to eq(18)
+        expect(pmd_issue2.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
+      end
+
       it "Report with report files" do
         target_files = [
-            '/Users/developer/sample/app/src/main/java/com/android/sample/Application.java',
-            '/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java',
-            '/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java',
-            '/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java',
-            '/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java',
-            '/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java'
+          "/Users/developer/sample/app/src/main/java/com/android/sample/Application.java",
+          "/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java",
+          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
+          "/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java",
+          "/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java",
+          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
