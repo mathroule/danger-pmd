@@ -94,7 +94,7 @@ module Danger
       report_files_glop = []
       report_files.each do |report_file|
         Dir[report_file].each do |report_file_glop|
-          unless File.exist?(report_file_glop)
+          unless report_file_exist?(report_file_glop)
             return fail("PMD report file not found #{report_file_glop}")
           end
 
