@@ -29,7 +29,7 @@ module Danger
       end
 
       it "Set custom report files paths" do
-        custom_report_paths = %w(custom-path/pmd_report_1.xml custom-path/pmd_report_2.xml)
+        custom_report_paths = ["custom-path/pmd_report_1.xml", "custom-path/pmd_report_2.xml"]
         @pmd.report_files = custom_report_paths
         expect(@pmd.report_files).to eq(custom_report_paths)
       end
@@ -163,7 +163,7 @@ module Danger
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
-        @pmd.report_files = %w(spec/fixtures/pmd_report.xml spec/fixtures/**/pmd_sub_report.xml)
+        @pmd.report_files = ["spec/fixtures/pmd_report.xml", "spec/fixtures/**/pmd_sub_report.xml"]
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
