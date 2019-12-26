@@ -249,7 +249,7 @@ module Danger
         expect(pmd_issues[0]).to be("Could not find `gradlew` inside current directory")
       end
 
-      it "Report with not existing report file" do
+      it "Report without existing report file" do
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return([])
 
         @pmd.report_file = "spec/fixtures/custom/pmd_report.xml"
