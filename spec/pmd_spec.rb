@@ -14,21 +14,21 @@ module Danger
         @pmd = @dangerfile.pmd
       end
 
-      it "Check default report_1 file path" do
+      it "Check default report file path" do
         expect(@pmd.report_file).to eq("app/build/reports/pmd/pmd.xml")
       end
 
-      it "Set custom report_1 file path" do
+      it "Set custom report file path" do
         custom_report_path = "custom-path/pmd_sub_report.xml"
         @pmd.report_file = custom_report_path
         expect(@pmd.report_file).to eq(custom_report_path)
       end
 
-      it "Check default report_1 files paths" do
+      it "Check default report files paths" do
         expect(@pmd.report_files).to eq(["app/build/reports/pmd/pmd.xml"])
       end
 
-      it "Set custom report_1 files paths" do
+      it "Set custom report files paths" do
         custom_report_paths = %w(custom-path/pmd_report_1.xml custom-path/pmd_report_2.xml)
         @pmd.report_files = custom_report_paths
         expect(@pmd.report_files).to eq(custom_report_paths)
