@@ -9,13 +9,13 @@ module Danger
   #
   #          pmd.report
   #
-  # @example Running PMD with a specific Gradle task or report file
+  # @example Running PMD with a specific Gradle task or report file (glob accepted)
   #
   #          pmd.gradle_task = 'app:pmd' #defalut: pmd
-  #          pmd.report_file = "app/build/reports/pmd/pmd.xml"
+  #          pmd.report_file = "module/build/reports/pmd/pmd.xml" #defalut: app/build/reports/pmd/pmd.xml
   #          pmd.report
   #
-  # @example Running PMD with an array of report files
+  # @example Running PMD with an array of report files (glob accepted)
   #
   #          pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
   #          pmd.report
@@ -69,7 +69,7 @@ module Danger
 
     # Location of report files.
     # If your pmd task outputs to a different location, you can specify it here.
-    # Defaults to "app/build/reports/pmd/pmd.xml".
+    # Defaults to ["app/build/reports/pmd/pmd.xml"].
     # @return [Array[String]]
     attr_writer :report_files
 
@@ -91,14 +91,14 @@ module Danger
         exec_gradle_task
       end
 
-      report_files_flattened = []
+      report_files_expanded = []
       Dir.glob(report_files).sort.each do |report_file|
         return fail("PMD report file not found #{report_file}") unless report_file_exist?(report_file)
 
-        report_files_flattened.push(report_file)
+        report_files_expanded.push(report_file)
       end
 
-      report_and_send_inline_comment(report_files_flattened, inline_mode)
+      report_and_send_inline_comment(report_files_expanded, inline_mode)
     end
 
     private
