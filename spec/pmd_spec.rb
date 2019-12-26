@@ -44,14 +44,14 @@ module Danger
         expect(@pmd.gradle_task).to eq(custom_task)
       end
 
+      it "Check default skip Gradle task" do
+        expect(@pmd.skip_gradle_task).to eq(false)
+      end
+
       it "Skip Gradle task" do
         skip_gradle_task = true
         @pmd.skip_gradle_task = skip_gradle_task
         expect(@pmd.skip_gradle_task).to eq(skip_gradle_task)
-      end
-
-      it "Check default skip Gradle task" do
-        expect(@pmd.skip_gradle_task).to eq(false)
       end
 
       it "Report with report file" do
