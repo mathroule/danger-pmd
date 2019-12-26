@@ -91,16 +91,16 @@ module Danger
         exec_gradle_task
       end
 
-      all_report_files = []
+      report_files_flatten = []
       report_files.each do |report_file|
         Dir.glob(report_file).each do |report_file_glob|
           return fail("PMD report file not found #{report_file_glob}") unless report_file_exist?(report_file_glob)
 
-          all_report_files.push(report_file_glob)
+          report_files_flatten.push(report_file_glob)
         end
       end
 
-      report_and_send_inline_comment(all_report_files, inline_mode)
+      report_and_send_inline_comment(report_files_flatten, inline_mode)
     end
 
     private
