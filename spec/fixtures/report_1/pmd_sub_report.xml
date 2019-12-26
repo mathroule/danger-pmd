@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.8.0" timestamp="2019-10-03T20:34:18.074">
+<file name="/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java">
+<violation beginline="23" endline="23" begincolumn="21" endcolumn="21" rule="CollapsibleIfStatements" ruleset="Design" package="com.android.sample" class="Utils" method="doSomething" externalInfoUrl="https://pmd.github.io/pmd-6.15.0/pmd_rules_java_design.html#collapsibleifstatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="45" endline="45" begincolumn="23" endcolumn="30" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="com.android.sample" class="Utils" externalInfoUrl="https://pmd.github.io/pmd-6.15.0/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal &quot;unused&quot; appears 4 times in this file; the first occurrence is on line 45
+</violation>
+</file>
+</pmd>
