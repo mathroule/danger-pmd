@@ -124,6 +124,11 @@ Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
 
+Metrics/ModuleLength:
+  Max: 100
+  Exclude:
+    - "**/*_spec.rb"
+
 Style/MixinGrouping:
   Enabled: false
 

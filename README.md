@@ -25,44 +25,50 @@ pmd.report
 </pre>
 </blockquote>
 
-#### Attributes
+<blockquote>Running PMD with an array of report files
+<pre>
+pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
+pmd.report
+</pre>
+</blockquote>
 
-`gradle_module` - Custom Gradle module to run.
-This is useful when your project has different flavors.
-Defaults to "app".
+<blockquote>Running PMD without running a Gradle task
+<pre>
+pmd.skip_gradle_task = true
+pmd.report
+</pre>
+</blockquote>
+
+#### Attributes
 
 `gradle_task` - Custom Gradle task to run.
 This is useful when your project has different flavors.
 Defaults to "pmd".
 
+`skip_gradle_task` - Skip Gradle task.
+If you skip Gradle task, for example project does not manage Gradle.
+
 `report_file` - Location of report file
 If your pmd task outputs to a different location, you can specify it here.
 Defaults to "app/build/reports/pmd/pmd.xml".
 
-`skip_gradle_task` - Skip Gradle task.
-If you skip Gradle task, for example project does not manage Gradle.
+`report_files` - Location of report files
+If your pmd task outputs to a different location, you can specify it here.
+Defaults to ["app/build/reports/pmd/pmd.xml]".
 
 #### Methods
 
-`report` - Calls pmd task of your Gradle project.
+`report` - Calls PMD task of your Gradle project, send comment and return PMD issues.
 It fails if `gradlew` cannot be found inside current directory.
-It fails if `report_file` cannot be found inside current directory.
+It fails if `report_file` or `report_files` cannot be found inside current directory.
 
-`target_files` - A getter for current updated files.
+`gradle_task` - A getter for `gradle_task`, returning Gradle task report.
 
-`exec_gradle_task` - Run Gradle task.
+`skip_gradle_task` - A getter for `skip_gradle_task`.
 
-`gradlew_exists?` - Check gradlew file exists in current directory.
+`report_file` - A getter for `report_file`.
 
-`report_file_exist?` - Check report_file exists in current directory.
-
-`pmd_report` - A getter for `pmd_report`, returning PMD report.
-
-`pmd_issues` - A getter for PMD issues, returning PMD issues.
-
-`send_inline_comment` - Send inline comment with danger's warn or fail method.
-
-`skip_gradle_task` - Skip Gradle task.
+`report_files` - A getter for `report_files`.
 
 ## Development
 

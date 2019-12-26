@@ -2,11 +2,9 @@
 
 class PmdViolation
   PRIORITY_ERROR_THRESHOLD = 2
-  attr_accessor :module_name
   attr_accessor :violation
 
-  def initialize(module_name, violation)
-    @module_name = module_name
+  def initialize(violation)
     @violation = violation
   end
 

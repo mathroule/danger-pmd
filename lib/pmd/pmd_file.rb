@@ -2,11 +2,9 @@
 
 class PmdFile
   require_relative "./pmd_violation"
-  attr_accessor :module_name
   attr_accessor :file
 
-  def initialize(module_name, file)
-    @module_name = module_name
+  def initialize(file)
     @file = file
   end
 
@@ -15,12 +13,19 @@ class PmdFile
   end
 
   def absolute_path
-    @absolute_path ||= Pathname.new(source_path[source_path.index(module_name), source_path.length]).to_s
+    dirname = File.basename(Dir.getwd)
+    if source_path.index(dirname)
+      index_start = source_path.index(dirname) + dirname.length + 1
+    else
+      index_start = 0
+    end
+    index_end = source_path.length
+    @absolute_path ||= Pathname.new(source_path[index_start, index_end]).to_s
   end
 
   def violations
     @violations ||= file.xpath("violation").map do |pmd_violation|
-      PmdViolation.new(module_name, pmd_violation)
+      PmdViolation.new(pmd_violation)
     end
   end
 end
