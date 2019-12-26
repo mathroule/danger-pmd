@@ -93,7 +93,7 @@ module Danger
 
       report_files_flatten = []
       report_files.each do |report_file|
-        Dir.glob(report_file).each do |report_file_glob|
+        Dir.glob(report_file).sort.each do |report_file_glob|
           return fail("PMD report file not found #{report_file_glob}") unless report_file_exist?(report_file_glob)
 
           report_files_flatten.push(report_file_glob)

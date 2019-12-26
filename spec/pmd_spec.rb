@@ -215,26 +215,26 @@ module Danger
 
         pmd_issue5 = pmd_issues[4]
         expect(pmd_issue5).not_to be_nil
-        expect(pmd_issue5.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
-        expect(pmd_issue5.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
+        expect(pmd_issue5.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
+        expect(pmd_issue5.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
         expect(pmd_issue5.violations).not_to be_nil
-        expect(pmd_issue5.violations.length).to eq(1)
+        expect(pmd_issue5.violations.length).to eq(2)
         expect(pmd_issue5.violations[0]).not_to be_nil
-        expect(pmd_issue5.violations[0].line).to eq(135)
-        expect(pmd_issue5.violations[0].description).to eq("The String literal \"label\" appears 5 times in this file; the first occurrence is on line 135")
+        expect(pmd_issue5.violations[0].line).to eq(23)
+        expect(pmd_issue5.violations[0].description).to eq("These nested if statements could be combined")
+        expect(pmd_issue5.violations[1]).not_to be_nil
+        expect(pmd_issue5.violations[1].line).to eq(45)
+        expect(pmd_issue5.violations[1].description).to eq("The String literal \"unused\" appears 4 times in this file; the first occurrence is on line 45")
 
         pmd_issue6 = pmd_issues[5]
         expect(pmd_issue6).not_to be_nil
-        expect(pmd_issue6.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
-        expect(pmd_issue6.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
+        expect(pmd_issue6.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
+        expect(pmd_issue6.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
         expect(pmd_issue6.violations).not_to be_nil
-        expect(pmd_issue6.violations.length).to eq(2)
+        expect(pmd_issue6.violations.length).to eq(1)
         expect(pmd_issue6.violations[0]).not_to be_nil
-        expect(pmd_issue6.violations[0].line).to eq(23)
-        expect(pmd_issue6.violations[0].description).to eq("These nested if statements could be combined")
-        expect(pmd_issue6.violations[1]).not_to be_nil
-        expect(pmd_issue6.violations[1].line).to eq(45)
-        expect(pmd_issue6.violations[1].description).to eq("The String literal \"unused\" appears 4 times in this file; the first occurrence is on line 45")
+        expect(pmd_issue6.violations[0].line).to eq(135)
+        expect(pmd_issue6.violations[0].description).to eq("The String literal \"label\" appears 5 times in this file; the first occurrence is on line 135")
       end
 
       it "Report without Gradle" do
