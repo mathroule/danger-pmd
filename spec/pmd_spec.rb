@@ -257,7 +257,8 @@ module Danger
 
         pmd_issues = @pmd.report
         expect(pmd_issues).not_to be_nil
-        expect(pmd_issues.length).to be(0)
+        expect(pmd_issues.length).to be(1)
+        expect(pmd_issues[0]).to eq("Could not find matching PMD report files for [\"spec/fixtures/custom/pmd_report.xml\"] inside current directory")
       end
     end
   end

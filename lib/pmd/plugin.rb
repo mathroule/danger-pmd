@@ -91,12 +91,8 @@ module Danger
         exec_gradle_task
       end
 
-      report_files_expanded = []
-      Dir.glob(report_files).sort.each do |report_file|
-        return fail("PMD report file not found #{report_file}") unless report_file_exist?(report_file)
-
-        report_files_expanded.push(report_file)
-      end
+      report_files_expanded = Dir.glob(report_files).sort
+      return fail("Could not find matching PMD report files for #{report_files} inside current directory") if report_files_expanded.empty?
 
       report_and_send_inline_comment(report_files_expanded, inline_mode)
     end
