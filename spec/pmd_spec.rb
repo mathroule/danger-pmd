@@ -176,7 +176,7 @@ module Danger
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
         @pmd.report_files = ["spec/fixtures/pmd_report.xml", "spec/fixtures/**/pmd_sub_report.xml"]
-        @pmd.root_path = "/Users/developer/sample"
+        @pmd.root_path = "/Users/developer/sample/"
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
