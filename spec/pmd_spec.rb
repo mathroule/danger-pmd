@@ -64,6 +64,7 @@ module Danger
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
         @pmd.report_file = "spec/fixtures/pmd_report.xml"
+        @pmd.root_path = "/Users/developer/sample/"
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
@@ -72,8 +73,8 @@ module Danger
 
         pmd_issue1 = pmd_issues[0]
         expect(pmd_issue1).not_to be_nil
-        expect(pmd_issue1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.relative_path).to eq("app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.violations).not_to be_nil
         expect(pmd_issue1.violations.length).to eq(1)
         expect(pmd_issue1.violations.first).not_to be_nil
@@ -82,8 +83,8 @@ module Danger
 
         pmd_issue2 = pmd_issues[1]
         expect(pmd_issue2).not_to be_nil
-        expect(pmd_issue2.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
         expect(pmd_issue2.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
+        expect(pmd_issue2.relative_path).to eq("app/src/main/java/com/android/sample/MainActivity.java")
         expect(pmd_issue2.violations).not_to be_nil
         expect(pmd_issue2.violations.length).to eq(1)
         expect(pmd_issue2.violations.first).not_to be_nil
@@ -92,8 +93,8 @@ module Danger
 
         pmd_issue3 = pmd_issues[2]
         expect(pmd_issue3).not_to be_nil
-        expect(pmd_issue3.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
         expect(pmd_issue3.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
+        expect(pmd_issue3.relative_path).to eq("app/src/test/java/com/android/sample/ExampleUnitTest.java")
         expect(pmd_issue3.violations).not_to be_nil
         expect(pmd_issue3.violations.length).to eq(1)
         expect(pmd_issue3.violations.first).not_to be_nil
@@ -102,8 +103,8 @@ module Danger
 
         pmd_issue4 = pmd_issues[3]
         expect(pmd_issue4).not_to be_nil
-        expect(pmd_issue4.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue4.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue4.relative_path).to eq("app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue4.violations).not_to be_nil
         expect(pmd_issue4.violations.length).to eq(2)
         expect(pmd_issue4.violations[0]).not_to be_nil
@@ -122,6 +123,7 @@ module Danger
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
         @pmd.report_file = "spec/fixtures/pmd_report.xml"
+        @pmd.root_path = "/Users/developer/sample/"
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
@@ -130,8 +132,8 @@ module Danger
 
         pmd_issue1 = pmd_issues[0]
         expect(pmd_issue1).not_to be_nil
-        expect(pmd_issue1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.relative_path).to eq("app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.violations).not_to be_nil
         expect(pmd_issue1.violations.length).to eq(1)
         expect(pmd_issue1.violations.first).not_to be_nil
@@ -140,8 +142,8 @@ module Danger
 
         pmd_issue2 = pmd_issues[1]
         expect(pmd_issue2).not_to be_nil
-        expect(pmd_issue2.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue2.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue2.relative_path).to eq("app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue2.violations).not_to be_nil
         expect(pmd_issue2.violations.length).to eq(2)
         expect(pmd_issue2.violations[0]).not_to be_nil
@@ -164,6 +166,7 @@ module Danger
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
         @pmd.report_files = ["spec/fixtures/pmd_report.xml", "spec/fixtures/**/pmd_sub_report.xml"]
+        @pmd.root_path = "/Users/developer/sample"
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
@@ -172,8 +175,8 @@ module Danger
 
         pmd_issue1 = pmd_issues[0]
         expect(pmd_issue1).not_to be_nil
-        expect(pmd_issue1.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+        expect(pmd_issue1.relative_path).to eq("app/src/main/java/com/android/sample/Tools.java")
         expect(pmd_issue1.violations).not_to be_nil
         expect(pmd_issue1.violations.length).to eq(1)
         expect(pmd_issue1.violations.first).not_to be_nil
@@ -182,8 +185,8 @@ module Danger
 
         pmd_issue2 = pmd_issues[1]
         expect(pmd_issue2).not_to be_nil
-        expect(pmd_issue2.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
         expect(pmd_issue2.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java")
+        expect(pmd_issue2.relative_path).to eq("app/src/main/java/com/android/sample/MainActivity.java")
         expect(pmd_issue2.violations).not_to be_nil
         expect(pmd_issue2.violations.length).to eq(1)
         expect(pmd_issue2.violations.first).not_to be_nil
@@ -192,8 +195,8 @@ module Danger
 
         pmd_issue3 = pmd_issues[2]
         expect(pmd_issue3).not_to be_nil
-        expect(pmd_issue3.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
         expect(pmd_issue3.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java")
+        expect(pmd_issue3.relative_path).to eq("app/src/test/java/com/android/sample/ExampleUnitTest.java")
         expect(pmd_issue3.violations).not_to be_nil
         expect(pmd_issue3.violations.length).to eq(1)
         expect(pmd_issue3.violations.first).not_to be_nil
@@ -202,8 +205,8 @@ module Danger
 
         pmd_issue4 = pmd_issues[3]
         expect(pmd_issue4).not_to be_nil
-        expect(pmd_issue4.source_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue4.absolute_path).to eq("/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java")
+        expect(pmd_issue4.relative_path).to eq("app/src/test/java/com/android/sample/ToolsTest.java")
         expect(pmd_issue4.violations).not_to be_nil
         expect(pmd_issue4.violations.length).to eq(2)
         expect(pmd_issue4.violations[0]).not_to be_nil
@@ -215,8 +218,8 @@ module Danger
 
         pmd_issue5 = pmd_issues[4]
         expect(pmd_issue5).not_to be_nil
-        expect(pmd_issue5.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
         expect(pmd_issue5.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java")
+        expect(pmd_issue5.relative_path).to eq("app/src/main/java/com/android/sample/Utils.java")
         expect(pmd_issue5.violations).not_to be_nil
         expect(pmd_issue5.violations.length).to eq(2)
         expect(pmd_issue5.violations[0]).not_to be_nil
@@ -228,8 +231,8 @@ module Danger
 
         pmd_issue6 = pmd_issues[5]
         expect(pmd_issue6).not_to be_nil
-        expect(pmd_issue6.source_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
         expect(pmd_issue6.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Application.java")
+        expect(pmd_issue6.relative_path).to eq("app/src/main/java/com/android/sample/Application.java")
         expect(pmd_issue6.violations).not_to be_nil
         expect(pmd_issue6.violations.length).to eq(1)
         expect(pmd_issue6.violations[0]).not_to be_nil

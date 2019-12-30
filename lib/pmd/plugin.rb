@@ -55,6 +55,18 @@ module Danger
       @skip_gradle_task ||= false
     end
 
+    # An absolute path to a root.
+    # To comment errors to VCS, this needs to know relative path of files from the root.
+    # Defaults to result of "git rev-parse --show-toplevel".
+    # @return [String] the root path of git repository by default.
+    attr_accessor :root_path
+
+    # A getter for `root_path`, returning result of "git rev-parse --show-toplevel" if value is nil.
+    # @return [String]
+    def root_path
+      @root_path ||= `git rev-parse --show-toplevel`.chomp
+    end
+
     # Location of report file.
     # If your pmd task outputs to a different location, you can specify it here.
     # Defaults to "app/build/reports/pmd/pmd.xml".
@@ -128,7 +140,7 @@ module Danger
     # @return [Array[PmdFile]]
     def pmd_issues(report_file)
       pmd_report(report_file).xpath("//file").map do |pmd_file|
-        PmdFile.new(pmd_file)
+        PmdFile.new(root_path, pmd_file)
       end
     end
 

@@ -2,30 +2,45 @@
 
 class PmdFile
   require_relative "./pmd_violation"
+
   attr_accessor :file
 
-  def initialize(file)
+  # An absolute path to this file
+  #
+  # @return [String]
+  attr_reader :absolute_path
+
+  # A relative path to this file
+  #
+  # @return [String]
+  attr_reader :relative_path
+
+  def initialize(prefix, file)
     @file = file
-  end
+    @absolute_path = file.attribute("name").value.to_s
 
-  def source_path
-    @source_path ||= file.attribute("name").value.to_s
-  end
-
-  def absolute_path
-    dirname = File.basename(Dir.getwd)
-    if source_path.index(dirname)
-      index_start = source_path.index(dirname) + dirname.length + 1
+    if prefix.end_with?(file_separator)
+      @prefix = prefix
     else
-      index_start = 0
+      @prefix = prefix + file_separator
     end
-    index_end = source_path.length
-    @absolute_path ||= Pathname.new(source_path[index_start, index_end]).to_s
+
+    if @absolute_path.start_with?(@prefix)
+      @relative_path = @absolute_path[@prefix.length, @absolute_path.length - @prefix.length]
+    else
+      @relative_path = @absolute_path
+    end
   end
 
   def violations
     @violations ||= file.xpath("violation").map do |pmd_violation|
       PmdViolation.new(pmd_violation)
     end
+  end
+
+  private
+
+  def file_separator
+    File::ALT_SEPARATOR || File::SEPARATOR
   end
 end
