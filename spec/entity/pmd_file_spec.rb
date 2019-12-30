@@ -12,6 +12,11 @@ module Pmd
 
       expect(pmd_file.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
       expect(pmd_file.relative_path).to eq("app/src/main/java/com/android/sample/Tools.java")
+      expect(pmd_file.violations).not_to be_nil
+      expect(pmd_file.violations.length).to eq(1)
+      expect(pmd_file.violations.first).not_to be_nil
+      expect(pmd_file.violations.first.line).to eq(5)
+      expect(pmd_file.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
     end
 
     it "should initialize relative path not ending with file separator" do
@@ -20,6 +25,11 @@ module Pmd
 
       expect(pmd_file.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
       expect(pmd_file.relative_path).to eq("app/src/main/java/com/android/sample/Tools.java")
+      expect(pmd_file.violations).not_to be_nil
+      expect(pmd_file.violations.length).to eq(1)
+      expect(pmd_file.violations.first).not_to be_nil
+      expect(pmd_file.violations.first.line).to eq(5)
+      expect(pmd_file.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
     end
 
     it "should initialize relative path not prefixed" do
@@ -28,6 +38,11 @@ module Pmd
 
       expect(pmd_file.absolute_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
       expect(pmd_file.relative_path).to eq("/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java")
+      expect(pmd_file.violations).not_to be_nil
+      expect(pmd_file.violations.length).to eq(1)
+      expect(pmd_file.violations.first).not_to be_nil
+      expect(pmd_file.violations.first.line).to eq(5)
+      expect(pmd_file.violations.first.description).to eq("The utility class name 'Tools' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'")
     end
   end
 end
