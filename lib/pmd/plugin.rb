@@ -15,6 +15,11 @@ module Danger
   #          pmd.report_file = "module/build/reports/pmd/pmd.xml" #defalut: app/build/reports/pmd/pmd.xml
   #          pmd.report
   #
+  # @example Running PMD with a specific root path
+  #
+  #          pmd.root_path = '/Users/developer/project
+  #          pmd.report
+  #
   # @example Running PMD with an array of report files (glob accepted)
   #
   #          pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
