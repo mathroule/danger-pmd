@@ -101,7 +101,7 @@ module Danger
     # It fails if `report_file` cannot be found inside current directory.
     # It fails if `report_files` is empty.
     # @return [Array[PmdFile]]
-    def report(inline_comment = true)
+    def report(inline_mode = true)
       unless skip_gradle_task
         return fail("Could not find `gradlew` inside current directory") unless gradlew_exists?
 
@@ -111,7 +111,7 @@ module Danger
       report_files_expanded = Dir.glob(report_files).sort
       return fail("Could not find matching PMD report files for #{report_files} inside current directory") if report_files_expanded.empty?
 
-      do_comment(report_files_expanded, inline_comment)
+      do_comment(report_files_expanded, inline_mode)
     end
 
     private
@@ -157,7 +157,7 @@ module Danger
 
     # Generate report and send inline comment with Danger's warn or fail method.
     # @return [Array[PmdFile]]
-    def do_comment(report_files, inline_comment = true)
+    def do_comment(report_files, inline_mode = true)
       pmd_issues = []
 
       report_files.each do |report_file|
@@ -167,7 +167,7 @@ module Danger
           pmd_issues.push(pmd_file)
 
           pmd_file.violations.each do |pmd_violation|
-            if inline_comment
+            if inline_mode
               send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
             else
               send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
