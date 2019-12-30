@@ -34,7 +34,7 @@ module Danger
   # @tags java, android, pmd
 
   class DangerPmd < Plugin
-    require_relative "./pmd_file"
+    require_relative "./entity/pmd_file"
 
     # Custom Gradle task to run.
     # This is useful when your project has different flavors.
