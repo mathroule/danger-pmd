@@ -64,7 +64,7 @@ module Danger
     # To comment errors to VCS, this needs to know relative path of files from the root.
     # Defaults to result of "git rev-parse --show-toplevel".
     # @return [String] the root path of git repository by default.
-    attr_accessor :root_path
+    attr_writer :root_path
 
     # A getter for `root_path`, returning result of "git rev-parse --show-toplevel" if value is nil.
     # @return [String]
