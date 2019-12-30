@@ -66,10 +66,10 @@ module Danger
 
       it "Report with report file" do
         target_files = [
-          "/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java",
-          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
-          "/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java",
-          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
+          "app/src/main/java/com/android/sample/MainActivity.java",
+          "app/src/main/java/com/android/sample/Tools.java",
+          "app/src/test/java/com/android/sample/ExampleUnitTest.java",
+          "app/src/test/java/com/android/sample/ToolsTest.java"
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
@@ -127,8 +127,8 @@ module Danger
 
       it "Report with report file not in target files" do
         target_files = [
-          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
-          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
+          "app/src/main/java/com/android/sample/Tools.java",
+          "app/src/test/java/com/android/sample/ToolsTest.java"
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
@@ -166,12 +166,12 @@ module Danger
 
       it "Report with report files" do
         target_files = [
-          "/Users/developer/sample/app/src/main/java/com/android/sample/Application.java",
-          "/Users/developer/sample/app/src/main/java/com/android/sample/MainActivity.java",
-          "/Users/developer/sample/app/src/main/java/com/android/sample/Tools.java",
-          "/Users/developer/sample/app/src/main/java/com/android/sample/Utils.java",
-          "/Users/developer/sample/app/src/test/java/com/android/sample/ExampleUnitTest.java",
-          "/Users/developer/sample/app/src/test/java/com/android/sample/ToolsTest.java"
+          "app/src/main/java/com/android/sample/Application.java",
+          "app/src/main/java/com/android/sample/MainActivity.java",
+          "app/src/main/java/com/android/sample/Tools.java",
+          "app/src/main/java/com/android/sample/Utils.java",
+          "app/src/test/java/com/android/sample/ExampleUnitTest.java",
+          "app/src/test/java/com/android/sample/ToolsTest.java"
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 

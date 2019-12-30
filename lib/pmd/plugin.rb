@@ -162,14 +162,16 @@ module Danger
 
       report_files.each do |report_file|
         pmd_issues(report_file).each do |pmd_file|
-          next unless target_files.include? pmd_file.absolute_path
+          next unless target_files.include? pmd_file.relative_path
 
           pmd_issues.push(pmd_file)
 
-          next if inline_mode
-
           pmd_file.violations.each do |pmd_violation|
-            send(pmd_violation.type, pmd_violation.description, file: pmd_file.absolute_path, line: pmd_violation.line)
+            if inline_mode
+              send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
+            else
+              send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
+            end
           end
         end
       end
