@@ -14,26 +14,6 @@ module Danger
         @pmd = @dangerfile.pmd
       end
 
-      it "Check default report file path" do
-        expect(@pmd.report_file).to eq("app/build/reports/pmd/pmd.xml")
-      end
-
-      it "Set custom report file path" do
-        custom_report_path = "custom-path/pmd_sub_report.xml"
-        @pmd.report_file = custom_report_path
-        expect(@pmd.report_file).to eq(custom_report_path)
-      end
-
-      it "Check default report files paths" do
-        expect(@pmd.report_files).to eq(["app/build/reports/pmd/pmd.xml"])
-      end
-
-      it "Set custom report files paths" do
-        custom_report_paths = ["custom-path/pmd_report_1.xml", "custom-path/pmd_report_2.xml"]
-        @pmd.report_files = custom_report_paths
-        expect(@pmd.report_files).to eq(custom_report_paths)
-      end
-
       it "Check default Gradle task" do
         expect(@pmd.gradle_task).to eq("pmd")
       end
@@ -52,6 +32,26 @@ module Danger
         skip_gradle_task = true
         @pmd.skip_gradle_task = skip_gradle_task
         expect(@pmd.skip_gradle_task).to eq(skip_gradle_task)
+      end
+
+      it "Check default report file path" do
+        expect(@pmd.report_file).to eq("app/build/reports/pmd/pmd.xml")
+      end
+
+      it "Set custom report file path" do
+        custom_report_path = "custom-path/pmd_sub_report.xml"
+        @pmd.report_file = custom_report_path
+        expect(@pmd.report_file).to eq(custom_report_path)
+      end
+
+      it "Check default report files paths" do
+        expect(@pmd.report_files).to eq(["app/build/reports/pmd/pmd.xml"])
+      end
+
+      it "Set custom report files paths" do
+        custom_report_paths = ["custom-path/pmd_report_1.xml", "custom-path/pmd_report_2.xml"]
+        @pmd.report_files = custom_report_paths
+        expect(@pmd.report_files).to eq(custom_report_paths)
       end
 
       it "Check default root path" do
