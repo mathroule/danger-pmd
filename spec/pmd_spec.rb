@@ -48,10 +48,20 @@ module Danger
         expect(@pmd.skip_gradle_task).to eq(false)
       end
 
-      it "Skip Gradle task" do
+      it "Set custom skip Gradle task" do
         skip_gradle_task = true
         @pmd.skip_gradle_task = skip_gradle_task
         expect(@pmd.skip_gradle_task).to eq(skip_gradle_task)
+      end
+
+      it "Check default root path" do
+        expect(@pmd.root_path).to eq(Dir.pwd)
+      end
+
+      it "Set custom root path" do
+        root_path = "/Users/developer/sample/"
+        @pmd.root_path = root_path
+        expect(@pmd.root_path).to eq(root_path)
       end
 
       it "Report with report file" do
