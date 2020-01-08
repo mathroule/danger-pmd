@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PmdViolation
-  PRIORITY_ERROR_THRESHOLD = 2
+  PRIORITY_ERROR_THRESHOLD = 4
   attr_accessor :violation
 
   def initialize(violation)
