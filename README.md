@@ -1,6 +1,10 @@
 # Danger PMD
 
-Danger plugin for PMD formatted xml file. This plugin is inspired from https://github.com/kazy1991/danger-findbugs.
+Checks on your Gradle project's Java source files.
+This is done using [PMD](https://pmd.github.io)
+Results are passed out as tables in markdown.
+
+This plugin is inspired from https://github.com/kazy1991/danger-findbugs.
 
 ## Installation
 
@@ -12,31 +16,38 @@ Danger plugin for PMD formatted xml file. This plugin is inspired from https://g
     your `Dangerfile` under the `pmd` namespace.
 
 <blockquote>Running PMD with its basic configuration
-<pre>
+  <pre>
 pmd.report
-</pre>
+  </pre>
 </blockquote>
 
-<blockquote>Running PMD with a specific Gradle task or report file
-<pre>
+<blockquote>Running PMD with a specific Gradle task or report file (glob accepted)
+  <pre>
 pmd.gradle_task = 'app:pmd' #defalut: pmd
-pmd.report_file = "app/build/reports/pmd/pmd.xml"
+pmd.report_file = "module/build/reports/pmd/pmd.xml" #defalut: app/build/reports/pmd/pmd.xml
 pmd.report
-</pre>
+  </pre>
 </blockquote>
 
-<blockquote>Running PMD with an array of report files
-<pre>
+<blockquote>Running PMD with a specific root path
+  <pre>
+pmd.root_path = '/Users/developer/project
+pmd.report
+  </pre>
+</blockquote>
+
+<blockquote>Running PMD with an array of report files (glob accepted)
+  <pre>
 pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
 pmd.report
-</pre>
+  </pre>
 </blockquote>
 
 <blockquote>Running PMD without running a Gradle task
-<pre>
+  <pre>
 pmd.skip_gradle_task = true
 pmd.report
-</pre>
+  </pre>
 </blockquote>
 
 #### Attributes
@@ -47,24 +58,26 @@ Defaults to "pmd".
 
 `skip_gradle_task` - Skip Gradle task.
 If you skip Gradle task, for example project does not manage Gradle.
+Defaults to `false`.
 
-`root_path` - Location of the project root
-If your project root is different from git's top-level path.
+`root_path` - An absolute path to a root.
+To comment errors to VCS, this needs to know relative path of files from the root.
 Defaults to result of "git rev-parse --show-toplevel".
 
-`report_file` - Location of report file
+`report_file` - Location of report file.
 If your pmd task outputs to a different location, you can specify it here.
 Defaults to "app/build/reports/pmd/pmd.xml".
 
-`report_files` - Location of report files
+`report_files` - Location of report files.
 If your pmd task outputs to a different location, you can specify it here.
-Defaults to ["app/build/reports/pmd/pmd.xml]".
+Defaults to ["app/build/reports/pmd/pmd.xml"].
 
 #### Methods
 
-`report` - Calls PMD task of your Gradle project, send comment and return PMD issues.
+`report` - Calls PMD task of your Gradle project.
 It fails if `gradlew` cannot be found inside current directory.
-It fails if `report_file` or `report_files` cannot be found inside current directory.
+It fails if `report_file` cannot be found inside current directory.
+It fails if `report_files` is empty.
 
 `gradle_task` - A getter for `gradle_task`, returning Gradle task report.
 
