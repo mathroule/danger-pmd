@@ -23,22 +23,22 @@ pmd.report
 
 <blockquote>Running PMD with a specific Gradle task or report file (glob accepted)
   <pre>
-pmd.gradle_task = 'app:pmd' #defalut: pmd
-pmd.report_file = "module/build/reports/pmd/pmd.xml" #defalut: app/build/reports/pmd/pmd.xml
+pmd.gradle_task = 'app:pmd' # default: pmd
+pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: app/build/reports/pmd/pmd.xml
 pmd.report
   </pre>
 </blockquote>
 
 <blockquote>Running PMD with a specific root path
   <pre>
-pmd.root_path = '/Users/developer/project
+pmd.root_path = '/Users/developer/project'
 pmd.report
   </pre>
 </blockquote>
 
 <blockquote>Running PMD with an array of report files (glob accepted)
   <pre>
-pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
+pmd.report_files = ['modules/**/build/reports/pmd/pmd.xml', 'app/build/reports/pmd/pmd.xml']
 pmd.report
   </pre>
 </blockquote>
@@ -70,7 +70,7 @@ Defaults to "app/build/reports/pmd/pmd.xml".
 
 `report_files` - Location of report files.
 If your pmd task outputs to a different location, you can specify it here.
-Defaults to ["app/build/reports/pmd/pmd.xml"].
+Defaults to ['app/build/reports/pmd/pmd.xml'].
 
 #### Methods
 
