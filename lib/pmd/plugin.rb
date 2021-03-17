@@ -11,18 +11,18 @@ module Danger
   #
   # @example Running PMD with a specific Gradle task or report file (glob accepted)
   #
-  #          pmd.gradle_task = 'app:pmd' #defalut: pmd
-  #          pmd.report_file = "module/build/reports/pmd/pmd.xml" #defalut: app/build/reports/pmd/pmd.xml
+  #          pmd.gradle_task = 'app:pmd' # default: pmd
+  #          pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: app/build/reports/pmd/pmd.xml
   #          pmd.report
   #
   # @example Running PMD with a specific root path
   #
-  #          pmd.root_path = '/Users/developer/project
+  #          pmd.root_path = '/Users/developer/project'
   #          pmd.report
   #
   # @example Running PMD with an array of report files (glob accepted)
   #
-  #          pmd.report_files = ["modules/**/build/reports/pmd/pmd.xml", "app/build/reports/pmd/pmd.xml"]
+  #          pmd.report_files = ['modules/**/build/reports/pmd/pmd.xml', 'app/build/reports/pmd/pmd.xml']
   #          pmd.report
   #
   # @example Running PMD without running a Gradle task
@@ -32,7 +32,6 @@ module Danger
   #
   # @see mathroule/danger-pmd
   # @tags java, android, pmd
-
   class DangerPmd < Plugin
     require_relative "./entity/pmd_file"
 
