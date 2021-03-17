@@ -1,0 +1,52 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Publish gem
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+    - name: Run tests
+      run: bundle exec rake spec
+    - name: Publish gem
+      uses: dawidd6/action-publish-gem@v1
+      with:
+        api_key: "test"
+      #  api_key: ${{secrets.RUBYGEMS_API_KEY}}
+    - name: Set version name
+      id: release_info
+      run: |
+        echo "::set-output name=version_name::$(ls danger-pmd-*.gem | sed 's/.*\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\).*/\1/')"
+    - name: Create and push Git tag
+      run: |
+          git config user.email "mathroule@gmail.com"
+          git config user.name "Mathieu Rul"
+          git tag -am "Tagging for release ${{ steps.release_info.outputs.version_name }}" "${{ steps.release_info.outputs.version_name }}"
+          git push origin "${{ steps.release_info.outputs.version_name }}"
+    - name: Create GitHub release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.release_info.outputs.version_name }}
+        release_name: ${{ steps.release_info.outputs.version_name }}
+        body: Release ${{ steps.release_info.outputs.version_name }}
+        draft: false
+        prerelease: false
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        prerelease: false
+        automatic_release_tag: ${{ steps.release_info.outputs.version_name }}
+        files: |
+          danger-pmd-${{ steps.release_info.outputs.version_name }}.gem
