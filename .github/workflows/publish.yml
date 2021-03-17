@@ -20,33 +20,17 @@ jobs:
     - name: Publish gem
       uses: dawidd6/action-publish-gem@v1
       with:
-        api_key: "test"
-      #  api_key: ${{secrets.RUBYGEMS_API_KEY}}
-    - name: Set version name
-      id: release_info
-      run: |
-        echo "::set-output name=version_name::$(ls danger-pmd-*.gem | sed 's/.*\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\).*/\1/')"
+        api_key: ${{secrets.RUBYGEMS_API_KEY}}
     - name: Create and push Git tag
-      run: |
-          git config user.email "mathroule@gmail.com"
-          git config user.name "Mathieu Rul"
-          git tag -am "Tagging for release ${{ steps.release_info.outputs.version_name }}" "${{ steps.release_info.outputs.version_name }}"
-          git push origin "${{ steps.release_info.outputs.version_name }}"
-    - name: Create GitHub release
-      uses: actions/create-release@v1
-      id: create_release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: duderman/gh-gem-tag-action@v1
+      id: release_info
       with:
-        tag_name: ${{ steps.release_info.outputs.version_name }}
-        release_name: ${{ steps.release_info.outputs.version_name }}
-        body: Release ${{ steps.release_info.outputs.version_name }}
-        draft: false
-        prerelease: false
-    - uses: marvinpinto/action-automatic-releases@latest
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_prefix: v
+    - uses: marvinpinto/actions@v1.1.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         prerelease: false
-        automatic_release_tag: ${{ steps.release_info.outputs.version_name }}
+        automatic_release_tag: ${{ steps.release_info.outputs.tag }}
         files: |
-          danger-pmd-${{ steps.release_info.outputs.version_name }}.gem
+          danger-pmd-${{ steps.release_info.outputs.tag }}.gem
