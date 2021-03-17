@@ -27,10 +27,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag_prefix: v
-      - uses: marvinpinto/actions@v1.1.0
+      - uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: false
-          automatic_release_tag: ${{ steps.release_info.outputs.tag }}
-          files: |
-            danger-pmd-${{ steps.release_info.outputs.tag }}.gem
+          file: '*.gem'
+          tag_name: v${{ steps.release_info.outputs.tag }}.gem
