@@ -33,18 +33,18 @@ module Danger
   # @see mathroule/danger-pmd
   # @tags java, android, pmd
   class DangerPmd < Plugin
-    require_relative "./entity/pmd_file"
+    require_relative './entity/pmd_file'
 
     # Custom Gradle task to run.
     # This is useful when your project has different flavors.
-    # Defaults to "pmd".
+    # Defaults to 'pmd'.
     # @return [String]
     attr_writer :gradle_task
 
-    # A getter for `gradle_task`, returning "pmd" if value is nil.
+    # A getter for `gradle_task`, returning 'pmd' if value is nil.
     # @return [String]
     def gradle_task
-      @gradle_task ||= "pmd"
+      @gradle_task ||= 'pmd'
     end
 
     # Skip Gradle task.
@@ -61,11 +61,11 @@ module Danger
 
     # An absolute path to a root.
     # To comment errors to VCS, this needs to know relative path of files from the root.
-    # Defaults to result of "git rev-parse --show-toplevel".
+    # Defaults to result of 'git rev-parse --show-toplevel'.
     # @return [String] the root path of git repository by default.
     attr_writer :root_path
 
-    # A getter for `root_path`, returning result of "git rev-parse --show-toplevel" if value is nil.
+    # A getter for `root_path`, returning result of 'git rev-parse --show-toplevel' if value is nil.
     # @return [String]
     def root_path
       @root_path ||= `git rev-parse --show-toplevel`.chomp
@@ -73,23 +73,23 @@ module Danger
 
     # Location of report file.
     # If your pmd task outputs to a different location, you can specify it here.
-    # Defaults to "app/build/reports/pmd/pmd.xml".
+    # Defaults to 'app/build/reports/pmd/pmd.xml'.
     # @return [String]
     attr_writer :report_file
 
-    # A getter for `report_file`, returning "app/build/reports/pmd/pmd.xml" if value is nil.
+    # A getter for `report_file`, returning 'app/build/reports/pmd/pmd.xml' if value is nil.
     # @return [String]
     def report_file
-      @report_file ||= "app/build/reports/pmd/pmd.xml"
+      @report_file ||= 'app/build/reports/pmd/pmd.xml'
     end
 
     # Location of report files.
     # If your pmd task outputs to a different location, you can specify it here.
-    # Defaults to ["app/build/reports/pmd/pmd.xml"].
+    # Defaults to ['app/build/reports/pmd/pmd.xml'].
     # @return [Array[String]]
     attr_writer :report_files
 
-    # A getter for `report_files`, returning ["app/build/reports/pmd/pmd.xml"] if value is nil.
+    # A getter for `report_files`, returning ['app/build/reports/pmd/pmd.xml'] if value is nil.
     # @return [Array[String]]
     def report_files
       @report_files ||= [report_file]
@@ -100,9 +100,9 @@ module Danger
     # It fails if `report_file` cannot be found inside current directory.
     # It fails if `report_files` is empty.
     # @return [Array[PmdFile]]
-    def report(inline_mode = true)
+    def report(inline_mode: true)
       unless skip_gradle_task
-        return fail("Could not find `gradlew` inside current directory") unless gradlew_exists?
+        return fail('Could not find `gradlew` inside current directory') unless gradlew_exists?
 
         exec_gradle_task
       end
@@ -136,14 +136,14 @@ module Danger
     # A getter for `pmd_report`, returning PMD report.
     # @return [Oga::XML::Document]
     def pmd_report(report_file)
-      require "oga"
+      require 'oga'
       Oga.parse_xml(File.open(report_file))
     end
 
     # A getter for PMD issues, returning PMD issues.
     # @return [Array[PmdFile]]
     def pmd_issues(report_file)
-      pmd_report(report_file).xpath("//file").map do |pmd_file|
+      pmd_report(report_file).xpath('//file').map do |pmd_file|
         PmdFile.new(root_path, pmd_file)
       end
     end
@@ -156,7 +156,7 @@ module Danger
 
     # Generate report and send inline comment with Danger's warn or fail method.
     # @return [Array[PmdFile]]
-    def do_comment(report_files, inline_mode = true)
+    def do_comment(report_files, inline_mode)
       pmd_issues = []
 
       report_files.each do |report_file|
@@ -166,16 +166,20 @@ module Danger
           pmd_issues.push(pmd_file)
 
           pmd_file.violations.each do |pmd_violation|
-            if inline_mode
-              send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
-            else
-              send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
-            end
+            send_comment(pmd_file, pmd_violation, inline_mode)
           end
         end
       end
 
       pmd_issues
+    end
+
+    def send_comment(pmd_file, pmd_violation, inline_mode)
+      if inline_mode
+        send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
+      else
+        send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
+      end
     end
   end
 end

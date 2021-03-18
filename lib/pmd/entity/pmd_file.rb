@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+# Represent a PMD file.
 class PmdFile
-  require_relative "./pmd_violation"
+  require_relative './pmd_violation'
 
   attr_accessor :file
 
@@ -17,23 +18,19 @@ class PmdFile
 
   def initialize(prefix, file)
     @file = file
-    @absolute_path = file.attribute("name").value.to_s
+    @absolute_path = file.attribute('name').value.to_s
 
-    if prefix.end_with?(file_separator)
-      @prefix = prefix
-    else
-      @prefix = prefix + file_separator
-    end
+    @prefix = prefix + (prefix.end_with?(file_separator) ? '' : file_separator)
 
-    if @absolute_path.start_with?(@prefix)
-      @relative_path = @absolute_path[@prefix.length, @absolute_path.length - @prefix.length]
-    else
-      @relative_path = @absolute_path
-    end
+    @relative_path = if @absolute_path.start_with?(@prefix)
+                       @absolute_path[@prefix.length, @absolute_path.length - @prefix.length]
+                     else
+                       @absolute_path
+                     end
   end
 
   def violations
-    @violations ||= file.xpath("violation").map do |pmd_violation|
+    @violations ||= file.xpath('violation').map do |pmd_violation|
       PmdViolation.new(pmd_violation)
     end
   end
