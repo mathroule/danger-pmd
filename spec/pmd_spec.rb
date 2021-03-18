@@ -256,10 +256,7 @@ module Danger
         @pmd.report_file = 'spec/fixtures/pmd_report.xml'
         @pmd.skip_gradle_task = false
 
-        pmd_issues = @pmd.report
-        expect(pmd_issues).not_to be_nil
-        expect(pmd_issues.length).to be(1)
-        expect(pmd_issues[0]).to eq('Could not find `gradlew` inside current directory')
+        expect { @pmd.report }.to raise_error('Could not find `gradlew` inside current directory')
       end
 
       it 'Report without existing report file' do
@@ -268,10 +265,7 @@ module Danger
         @pmd.report_file = 'spec/fixtures/custom/pmd_report.xml'
         @pmd.skip_gradle_task = true
 
-        pmd_issues = @pmd.report
-        expect(pmd_issues).not_to be_nil
-        expect(pmd_issues.length).to be(1)
-        expect(pmd_issues[0]).to eq('Could not find matching PMD report files for ["spec/fixtures/custom/pmd_report.xml"] inside current directory')
+        expect { @pmd.report }.to raise_error('Could not find matching PMD report files for ["spec/fixtures/custom/pmd_report.xml"] inside current directory')
       end
     end
   end

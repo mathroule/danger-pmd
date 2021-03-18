@@ -2304,6 +2304,8 @@ Metrics/ModuleLength:
   CountComments: false  # count full line comments?
   Max: 100
   CountAsOne: []
+  Exclude:
+    - '**/*_spec.rb'
 
 Metrics/ParameterLists:
   Description: 'Avoid parameter lists longer than three or four parameters.'

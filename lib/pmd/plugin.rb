@@ -102,13 +102,13 @@ module Danger
     # @return [Array[PmdFile]]
     def report(inline_mode: true)
       unless skip_gradle_task
-        return fail('Could not find `gradlew` inside current directory') unless gradlew_exists?
+        raise('Could not find `gradlew` inside current directory') unless gradlew_exists?
 
         exec_gradle_task
       end
 
       report_files_expanded = Dir.glob(report_files).sort
-      return fail("Could not find matching PMD report files for #{report_files} inside current directory") if report_files_expanded.empty?
+      raise("Could not find matching PMD report files for #{report_files} inside current directory") if report_files_expanded.empty?
 
       do_comment(report_files_expanded, inline_mode)
     end
@@ -163,22 +163,22 @@ module Danger
         pmd_issues(report_file).each do |pmd_file|
           next unless target_files.include? pmd_file.relative_path
 
-          pmd_issues.push(pmd_file)
-
-          pmd_file.violations.each do |pmd_violation|
-            send_comment(pmd_file, pmd_violation, inline_mode)
-          end
+          parse_file(pmd_file, pmd_issues, inline_mode)
         end
       end
 
       pmd_issues
     end
 
-    def send_comment(pmd_file, pmd_violation, inline_mode)
-      if inline_mode
-        send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
-      else
-        send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
+    def parse_file(pmd_file, pmd_issues, inline_mode)
+      pmd_issues.push(pmd_file)
+
+      pmd_file.violations.each do |pmd_violation|
+        if inline_mode
+          send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
+        else
+          send(pmd_violation.type, "#{pmd_file.relative_path} : #{pmd_violation.description} at #{pmd_violation.line}")
+        end
       end
     end
   end
