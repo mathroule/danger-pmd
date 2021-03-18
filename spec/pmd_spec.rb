@@ -259,7 +259,7 @@ module Danger
         pmd_issues = @pmd.report
         expect(pmd_issues).not_to be_nil
         expect(pmd_issues.length).to be(1)
-        expect(pmd_issues[0]).to be("Could not find `gradlew` inside current directory")
+        expect(pmd_issues[0]).to eq("Could not find `gradlew` inside current directory")
       end
 
       it "Report without existing report file" do
