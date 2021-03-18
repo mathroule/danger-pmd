@@ -8,14 +8,17 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: Test with Ruby ${{ matrix.ruby }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.4', '2.7', '3.0' ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6'
+          ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Run tests
         run: bundle exec rake spec
