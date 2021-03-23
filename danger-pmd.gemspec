@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 13.0'
 
   # Testing support
-  spec.add_development_dependency 'rspec', '~> 3.10.0'
   spec.add_development_dependency 'codecov', '~> 0.5.1'
+  spec.add_development_dependency 'rspec', '~> 3.10.0'
 
   # Linting code and docs
   spec.add_development_dependency 'rubocop', '~> 1.11.0'
