@@ -27,8 +27,12 @@ module Danger
   #
   # @example Running PMD without running a Gradle task
   #
-  #          pmd.skip_gradle_task = true
+  #          pmd.skip_gradle_task = true # default: false
   #          pmd.report
+  #
+  # @example Running PMD without inline comment
+  #
+  #          pmd.report(inline_mode: false) # default: true
   #
   # @see mathroule/danger-pmd
   # @tags java, android, pmd
@@ -50,7 +54,7 @@ module Danger
     # Skip Gradle task.
     # If you skip Gradle task, for example project does not manage Gradle.
     # Defaults to `false`.
-    # @return [Bool]
+    # @return [Boolean]
     attr_writer :skip_gradle_task
 
     # A getter for `skip_gradle_task`, returning false if value is nil.
@@ -116,7 +120,7 @@ module Danger
     private
 
     # Check gradlew file exists in current directory.
-    # @return [Bool]
+    # @return [Boolean]
     def gradlew_exists?
       !`ls gradlew`.strip.empty?
     end

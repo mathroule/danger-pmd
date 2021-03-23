@@ -45,8 +45,14 @@ pmd.report
 
 <blockquote>Running PMD without running a Gradle task
   <pre>
-pmd.skip_gradle_task = true
+pmd.skip_gradle_task = true # default: false
 pmd.report
+  </pre>
+</blockquote>
+
+<blockquote>Running PMD without inline comment
+  <pre>
+pmd.report(inline_mode: false) # default: true
   </pre>
 </blockquote>
 
