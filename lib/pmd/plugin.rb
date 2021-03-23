@@ -127,12 +127,6 @@ module Danger
       system "./gradlew #{gradle_task}"
     end
 
-    # Check report_file exists in current directory.
-    # @return [Bool]
-    def report_file_exist?(report_file)
-      File.exist?(report_file)
-    end
-
     # A getter for `pmd_report`, returning PMD report.
     # @return [Oga::XML::Document]
     def pmd_report(report_file)
@@ -163,16 +157,16 @@ module Danger
         pmd_issues(report_file).each do |pmd_file|
           next unless target_files.include? pmd_file.relative_path
 
-          parse_file(pmd_file, pmd_issues, inline_mode)
+          pmd_issues.push(pmd_file)
+
+          parse_file(pmd_file, inline_mode)
         end
       end
 
       pmd_issues
     end
 
-    def parse_file(pmd_file, pmd_issues, inline_mode)
-      pmd_issues.push(pmd_file)
-
+    def parse_file(pmd_file, inline_mode)
       pmd_file.violations.each do |pmd_violation|
         if inline_mode
           send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)
