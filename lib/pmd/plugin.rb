@@ -42,10 +42,12 @@ module Danger
     # Custom Gradle task to run.
     # This is useful when your project has different flavors.
     # Defaults to 'pmd'.
+    #
     # @return [String]
     attr_writer :gradle_task
 
     # A getter for `gradle_task`, returning 'pmd' if value is nil.
+    #
     # @return [String]
     def gradle_task
       @gradle_task ||= 'pmd'
@@ -54,10 +56,12 @@ module Danger
     # Skip Gradle task.
     # If you skip Gradle task, for example project does not manage Gradle.
     # Defaults to `false`.
+    #
     # @return [Boolean]
     attr_writer :skip_gradle_task
 
     # A getter for `skip_gradle_task`, returning false if value is nil.
+    #
     # @return [Boolean]
     def skip_gradle_task
       @skip_gradle_task ||= false
@@ -66,10 +70,12 @@ module Danger
     # An absolute path to a root.
     # To comment errors to VCS, this needs to know relative path of files from the root.
     # Defaults to result of 'git rev-parse --show-toplevel'.
-    # @return [String] the root path of git repository by default.
+    #
+    # @return [String]
     attr_writer :root_path
 
     # A getter for `root_path`, returning result of `git rev-parse --show-toplevel` if value is nil.
+    #
     # @return [String]
     def root_path
       @root_path ||= `git rev-parse --show-toplevel`.chomp
@@ -78,10 +84,12 @@ module Danger
     # Location of report file.
     # If your PMD task task outputs to a different location, you can specify it here.
     # Defaults to 'app/build/reports/pmd/pmd.xml'.
+    #
     # @return [String]
     attr_writer :report_file
 
     # A getter for `report_file`, returning 'app/build/reports/pmd/pmd.xml' if value is nil.
+    #
     # @return [String]
     def report_file
       @report_file ||= 'app/build/reports/pmd/pmd.xml'
@@ -90,10 +98,12 @@ module Danger
     # Location of report files.
     # If your PMD task outputs to a different location, you can specify it here.
     # Defaults to ['app/build/reports/pmd/pmd.xml'].
+    #
     # @return [Array[String]]
     attr_writer :report_files
 
     # A getter for `report_files`, returning ['app/build/reports/pmd/pmd.xml'] if value is nil.
+    #
     # @return [Array[String]]
     def report_files
       @report_files ||= [report_file]
@@ -103,6 +113,9 @@ module Danger
     # It fails if `gradlew` cannot be found inside current directory.
     # It fails if `report_file` cannot be found inside current directory.
     # It fails if `report_files` is empty.
+    #
+    # @param [Boolean] inline_mode Report as inline comment, defaults to [true].
+    #
     # @return [Array[PmdFile]]
     def report(inline_mode: true)
       unless skip_gradle_task
@@ -120,18 +133,21 @@ module Danger
     private
 
     # Check gradlew file exists in current directory.
+    #
     # @return [Boolean]
     def gradlew_exists?
       !`ls gradlew`.strip.empty?
     end
 
     # Run Gradle task.
+    #
     # @return [void]
     def exec_gradle_task
       system "./gradlew #{gradle_task}"
     end
 
     # A getter for `pmd_report`, returning PMD report.
+    #
     # @return [Oga::XML::Document]
     def pmd_report(report_file)
       require 'oga'
@@ -139,6 +155,7 @@ module Danger
     end
 
     # A getter for PMD issues, returning PMD issues.
+    #
     # @return [Array[PmdFile]]
     def pmd_issues(report_file)
       pmd_report(report_file).xpath('//file').map do |pmd_file|
@@ -147,12 +164,14 @@ module Danger
     end
 
     # A getter for current updated files.
+    #
     # @return [Array[String]]
     def target_files
       @target_files ||= (git.modified_files - git.deleted_files) + git.added_files
     end
 
     # Generate report and send inline comment with Danger's warn or fail method.
+    #
     # @return [Array[PmdFile]]
     def do_comment(report_files, inline_mode)
       pmd_issues = []
