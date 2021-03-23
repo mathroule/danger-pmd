@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start
+
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
 require 'pathname'
 ROOT = Pathname.new(File.expand_path('..', __dir__))
 $LOAD_PATH.unshift("#{ROOT}lib".to_s)
