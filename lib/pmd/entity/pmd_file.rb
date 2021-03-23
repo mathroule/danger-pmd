@@ -20,10 +20,9 @@ class PmdFile
     @file = file
     @absolute_path = file.attribute('name').value.to_s
 
-    @prefix = prefix + (prefix.end_with?(file_separator) ? '' : file_separator)
-
-    @relative_path = if @absolute_path.start_with?(@prefix)
-                       @absolute_path[@prefix.length, @absolute_path.length - @prefix.length]
+    prefix += (prefix.end_with?(file_separator) ? '' : file_separator)
+    @relative_path = if @absolute_path.start_with?(prefix)
+                       @absolute_path[prefix.length, @absolute_path.length - prefix.length]
                      else
                        @absolute_path
                      end

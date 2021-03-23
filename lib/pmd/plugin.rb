@@ -148,6 +148,8 @@ module Danger
 
     # A getter for `pmd_report`, returning PMD report.
     #
+    # @param [String] report_file The report file.
+    #
     # @return [Oga::XML::Document]
     def pmd_report(report_file)
       require 'oga'
@@ -155,6 +157,8 @@ module Danger
     end
 
     # A getter for PMD issues, returning PMD issues.
+    #
+    # @param [String] report_file The report file.
     #
     # @return [Array[PmdFile]]
     def pmd_issues(report_file)
@@ -184,14 +188,14 @@ module Danger
 
           pmd_issues.push(pmd_file)
 
-          parse_file(pmd_file, inline_mode)
+          send_comment(pmd_file, inline_mode)
         end
       end
 
       pmd_issues
     end
 
-    def parse_file(pmd_file, inline_mode)
+    def send_comment(pmd_file, inline_mode)
       pmd_file.violations.each do |pmd_violation|
         if inline_mode
           send(pmd_violation.type, pmd_violation.description, file: pmd_file.relative_path, line: pmd_violation.line)

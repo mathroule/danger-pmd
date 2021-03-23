@@ -71,10 +71,10 @@ module Danger
       it 'Report with report file' do
         # noinspection RubyLiteralArrayInspection
         target_files = [
-          "app/src/main/java/com/android/sample/MainActivity.java",
-          "app/src/main/java/com/android/sample/Tools.java",
-          "app/src/test/java/com/android/sample/ExampleUnitTest.java",
-          "app/src/test/java/com/android/sample/ToolsTest.java"
+          'app/src/main/java/com/android/sample/MainActivity.java',
+          'app/src/main/java/com/android/sample/Tools.java',
+          'app/src/test/java/com/android/sample/ExampleUnitTest.java',
+          'app/src/test/java/com/android/sample/ToolsTest.java'
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
@@ -130,16 +130,16 @@ module Danger
         expect(pmd_issue4.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
       end
 
-      it "Report with report file not in target files" do
+      it 'Report with report file not in target files' do
         # noinspection RubyLiteralArrayInspection
         target_files = [
-          "app/src/main/java/com/android/sample/Tools.java",
-          "app/src/test/java/com/android/sample/ToolsTest.java"
+          'app/src/main/java/com/android/sample/Tools.java',
+          'app/src/test/java/com/android/sample/ToolsTest.java'
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
-        @pmd.report_file = "spec/fixtures/pmd_report.xml"
-        @pmd.root_path = "/Users/developer/sample/"
+        @pmd.report_file = 'spec/fixtures/pmd_report.xml'
+        @pmd.root_path = '/Users/developer/sample/'
         @pmd.skip_gradle_task = true
 
         pmd_issues = @pmd.report
@@ -170,15 +170,15 @@ module Danger
         expect(pmd_issue2.violations[1].description).to eq("The JUnit 4 test method name 'getLabel_2' doesn't match '[a-z][a-zA-Z0-9]*'")
       end
 
-      it "Report with report files" do
+      it 'Report with report files' do
         # noinspection RubyLiteralArrayInspection
         target_files = [
-          "app/src/main/java/com/android/sample/Application.java",
-          "app/src/main/java/com/android/sample/MainActivity.java",
-          "app/src/main/java/com/android/sample/Tools.java",
-          "app/src/main/java/com/android/sample/Utils.java",
-          "app/src/test/java/com/android/sample/ExampleUnitTest.java",
-          "app/src/test/java/com/android/sample/ToolsTest.java"
+          'app/src/main/java/com/android/sample/Application.java',
+          'app/src/main/java/com/android/sample/MainActivity.java',
+          'app/src/main/java/com/android/sample/Tools.java',
+          'app/src/main/java/com/android/sample/Utils.java',
+          'app/src/test/java/com/android/sample/ExampleUnitTest.java',
+          'app/src/test/java/com/android/sample/ToolsTest.java'
         ]
         allow_any_instance_of(Danger::DangerPmd).to receive(:target_files).and_return(target_files)
 
