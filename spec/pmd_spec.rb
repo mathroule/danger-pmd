@@ -32,6 +32,15 @@ module Danger
         expect(@pmd.skip_gradle_task).to be_truthy
       end
 
+      it 'Check default root path' do
+        expect(@pmd.root_path).to eq(Dir.pwd)
+      end
+
+      it 'Set custom root path' do
+        @pmd.root_path = '/Users/developer/project'
+        expect(@pmd.root_path).to eq('/Users/developer/project')
+      end
+
       it 'Check default report file path' do
         expect(@pmd.report_file).to eq('app/build/reports/pmd/pmd.xml')
       end
