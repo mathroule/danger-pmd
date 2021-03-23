@@ -172,6 +172,8 @@ module Danger
 
     # Generate report and send inline comment with Danger's warn or fail method.
     #
+    # @param [Boolean] inline_mode Report as inline comment, defaults to [true].
+    #
     # @return [Array[PmdFile]]
     def do_comment(report_files, inline_mode)
       pmd_issues = []
