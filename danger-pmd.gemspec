@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
 
   # Testing support
   spec.add_development_dependency 'rspec', '~> 3.10.0'
+  spec.add_development_dependency 'codecov', '~> 0.5.1'
 
   # Linting code and docs
   spec.add_development_dependency 'rubocop', '~> 1.11.0'
@@ -37,7 +38,6 @@ Gem::Specification.new do |spec|
   # Makes testing easy via `bundle exec guard`
   spec.add_development_dependency 'guard', '~> 2.16.2'
   spec.add_development_dependency 'guard-rspec', '~> 4.7.3'
-  spec.add_development_dependency 'codecov', '~> 0.5.1'
 
   # If you want to work on older builds of ruby
   spec.add_development_dependency 'listen', '~> 3.0.8'
