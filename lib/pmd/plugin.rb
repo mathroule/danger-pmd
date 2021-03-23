@@ -11,13 +11,13 @@ module Danger
   #
   # @example Running PMD with a specific Gradle task or report file (glob accepted)
   #
-  #          pmd.gradle_task = 'module:pmd' # default: pmd
-  #          pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: app/build/reports/pmd/pmd.xml
+  #          pmd.gradle_task = 'module:pmd' # default: 'pmd'
+  #          pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: 'app/build/reports/pmd/pmd.xml'
   #          pmd.report
   #
   # @example Running PMD with a specific root path
   #
-  #          pmd.root_path = '/Users/developer/project'
+  #          pmd.root_path = '/Users/developer/project' # default: result of `git rev-parse --show-toplevel`
   #          pmd.report
   #
   # @example Running PMD with an array of report files (glob accepted)
@@ -65,14 +65,14 @@ module Danger
     # @return [String] the root path of git repository by default.
     attr_writer :root_path
 
-    # A getter for `root_path`, returning result of 'git rev-parse --show-toplevel' if value is nil.
+    # A getter for `root_path`, returning result of `git rev-parse --show-toplevel` if value is nil.
     # @return [String]
     def root_path
       @root_path ||= `git rev-parse --show-toplevel`.chomp
     end
 
     # Location of report file.
-    # If your pmd task outputs to a different location, you can specify it here.
+    # If your PMD task task outputs to a different location, you can specify it here.
     # Defaults to 'app/build/reports/pmd/pmd.xml'.
     # @return [String]
     attr_writer :report_file
@@ -84,7 +84,7 @@ module Danger
     end
 
     # Location of report files.
-    # If your pmd task outputs to a different location, you can specify it here.
+    # If your PMD task outputs to a different location, you can specify it here.
     # Defaults to ['app/build/reports/pmd/pmd.xml'].
     # @return [Array[String]]
     attr_writer :report_files

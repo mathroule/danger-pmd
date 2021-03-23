@@ -23,15 +23,15 @@ pmd.report
 
 <blockquote>Running PMD with a specific Gradle task or report file (glob accepted)
   <pre>
-pmd.gradle_task = 'module:pmd' # default: pmd
-pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: app/build/reports/pmd/pmd.xml
+pmd.gradle_task = 'module:pmd' # default: 'pmd'
+pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: 'app/build/reports/pmd/pmd.xml'
 pmd.report
   </pre>
 </blockquote>
 
 <blockquote>Running PMD with a specific root path
   <pre>
-pmd.root_path = '/Users/developer/project'
+pmd.root_path = '/Users/developer/project' # default: result of `git rev-parse --show-toplevel`
 pmd.report
   </pre>
 </blockquote>
