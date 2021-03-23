@@ -19,19 +19,17 @@ module Danger
       end
 
       it 'Set custom Gradle task' do
-        custom_task = 'pmdStagingDebug'
-        @pmd.gradle_task = custom_task
-        expect(@pmd.gradle_task).to eq(custom_task)
+        @pmd.gradle_task = 'pmdStagingDebug'
+        expect(@pmd.gradle_task).to eq('pmdStagingDebug')
       end
 
       it 'Check default skip Gradle task' do
-        expect(@pmd.skip_gradle_task).to eq(false)
+        expect(@pmd.skip_gradle_task).to be_falsey
       end
 
       it 'Set custom skip Gradle task' do
-        skip_gradle_task = true
-        @pmd.skip_gradle_task = skip_gradle_task
-        expect(@pmd.skip_gradle_task).to eq(skip_gradle_task)
+        @pmd.skip_gradle_task = true
+        expect(@pmd.skip_gradle_task).to be_truthy
       end
 
       it 'Check default report file path' do
@@ -39,19 +37,17 @@ module Danger
       end
 
       it 'Set custom report file path' do
-        custom_report_path = 'custom-path/pmd_sub_report.xml'
-        @pmd.report_file = custom_report_path
-        expect(@pmd.report_file).to eq(custom_report_path)
+        @pmd.report_file = 'custom-path/pmd_sub_report.xml'
+        expect(@pmd.report_file).to eq('custom-path/pmd_sub_report.xml')
       end
 
       it 'Check default report files paths' do
-        expect(@pmd.report_files).to eq(['app/build/reports/pmd/pmd.xml'])
+        expect(@pmd.report_files).to contain_exactly('app/build/reports/pmd/pmd.xml')
       end
 
       it 'Set custom report files paths' do
-        custom_report_paths = %w[custom-path/pmd_report_1.xml custom-path/pmd_report_2.xml]
-        @pmd.report_files = custom_report_paths
-        expect(@pmd.report_files).to eq(custom_report_paths)
+        @pmd.report_files = %w[custom-path/pmd_report_1.xml custom-path/pmd_report_2.xml]
+        expect(@pmd.report_files).to contain_exactly('custom-path/pmd_report_1.xml', 'custom-path/pmd_report_2.xml')
       end
 
       it 'Check default root path' do
@@ -59,12 +55,12 @@ module Danger
       end
 
       it 'Set custom root path' do
-        root_path = '/Users/developer/sample/'
-        @pmd.root_path = root_path
-        expect(@pmd.root_path).to eq(root_path)
+        @pmd.root_path = '/Users/developer/sample/'
+        expect(@pmd.root_path).to eq('/Users/developer/sample/')
       end
 
       it 'Report with report file' do
+        # noinspection RubyLiteralArrayInspection
         target_files = [
           "app/src/main/java/com/android/sample/MainActivity.java",
           "app/src/main/java/com/android/sample/Tools.java",
@@ -126,6 +122,7 @@ module Danger
       end
 
       it "Report with report file not in target files" do
+        # noinspection RubyLiteralArrayInspection
         target_files = [
           "app/src/main/java/com/android/sample/Tools.java",
           "app/src/test/java/com/android/sample/ToolsTest.java"
@@ -165,6 +162,7 @@ module Danger
       end
 
       it "Report with report files" do
+        # noinspection RubyLiteralArrayInspection
         target_files = [
           "app/src/main/java/com/android/sample/Application.java",
           "app/src/main/java/com/android/sample/MainActivity.java",
