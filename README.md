@@ -23,7 +23,7 @@ pmd.report
 
 <blockquote>Running PMD with a specific Gradle task or report file (glob accepted)
   <pre>
-pmd.gradle_task = 'app:pmd' # default: pmd
+pmd.gradle_task = 'module:pmd' # default: pmd
 pmd.report_file = 'module/build/reports/pmd/pmd.xml' # default: app/build/reports/pmd/pmd.xml
 pmd.report
   </pre>
