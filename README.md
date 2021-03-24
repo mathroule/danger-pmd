@@ -1,5 +1,5 @@
 # Danger PMD
-[![Latest release](https://img.shields.io/github/v/release/mathroule/danger-pmd.svg)](https://github.com/mathroule/danger-pmd/releases/latest) [![Deploy](https://github.com/mathroule/danger-pmd/workflows/Deploy/badge.svg)](https://github.com/mathroule/danger-pmd/actions) [![codecov](https://codecov.io/gh/mathroule/danger-pmd/branch/main/graph/badge.svg?token=HYA9XW0GL5)](https://codecov.io/gh/mathroule/danger-pmd)
+[![Latest release](https://img.shields.io/github/v/release/mathroule/danger-pmd.svg)](https://github.com/mathroule/danger-pmd/releases/latest) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Deploy](https://github.com/mathroule/danger-pmd/workflows/Deploy/badge.svg)](https://github.com/mathroule/danger-pmd/actions) [![codecov](https://codecov.io/gh/mathroule/danger-pmd/branch/main/graph/badge.svg?token=HYA9XW0GL5)](https://codecov.io/gh/mathroule/danger-pmd)
 
 Checks on your Gradle project's Java source files.
 This is done using [PMD](https://pmd.github.io)
