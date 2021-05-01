@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    danger-pmd (1.0.4)
+    danger-pmd (1.0.5)
       danger-plugin-api (~> 1.0)
       oga (~> 2.15)
 
